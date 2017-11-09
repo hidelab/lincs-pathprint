@@ -1,4 +1,4 @@
-# Script's Job: Produces experiment-fingerprints
+# Script's Job: Initiates the scripts that produce experiment-fingerprints
 #
 # Author: Sokratis Kariotis
 # Status: v1

@@ -12,7 +12,7 @@ print("preparing for script launch, 5s synch delay")
 Sys.sleep(5)
 
 # Load the sample set in
-current_samples <- sampleset[[1]];
+current_samples <- sampleset[[3]];
 total <- length(current_samples)
 
 # load contents of directory once
