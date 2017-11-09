@@ -1,4 +1,4 @@
-# My Job: Get the .gctx matrix and start threads which create fingerprint files per experiment 
+# Script's Job: Get the .gctx matrix and start threads which create fingerprint files per experiment 
 #
 # Author: Sokratis Kariotis
 # Status: v1
@@ -10,7 +10,6 @@
 # the entrezUpdate.R script from the package GMAfunctions. Finally, the script 
 # initiates a number of cores each one handling running the gctx2fingerprint.R
 # script to produce the experiment fingerprints.
-
 
 # For this script we need:
 # > (optional) The .gctx matrix downloaded here "~/LINCS project/LINCS specific scripts/gctx_Folder"
