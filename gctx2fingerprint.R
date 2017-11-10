@@ -26,7 +26,6 @@ load("/shared/hidelab2/shared/Sokratis/pathprint/fingerprint/package/pathprint/d
 # enrichmentMethod : the enrichment method to be used {string}
 # transformation   : the transformation to be used {string}
 # statistic        : the statistic to be used {string}
-# normalizedScore  : normalize of not {boolean}
 # progressBar      : show progress bar for not {boolean}
 
 
@@ -35,7 +34,7 @@ load("/shared/hidelab2/shared/Sokratis/pathprint/fingerprint/package/pathprint/d
 gctx2fingerprint<-function(	EXP, EXPath = tempdir(), GEOthreshold = TRUE,
 							geneset = "KEGG and Wikipathways and static",
 							enrichmentMethod = "SCE", transformation = "squared.rank",
-							statistic = "mean", normalizedScore = FALSE,
+							statistic = "mean",
 							progressBar = FALSE
 							)
 	{
@@ -67,23 +66,37 @@ gctx2fingerprint<-function(	EXP, EXPath = tempdir(), GEOthreshold = TRUE,
     colnames(exprs)[1] <- "ID_REF"
     exprs$ID_REF <- tolower(exprs$ID_REF)
     rownames(exprs) <- exp_matrix_unique[,1]
-    
 
+    #########							
+    # Run pathway enrichment	
+    #########
     
-    # exprs<-GSMtable2exprs(Table(geo))
+    print("Running fingerprint")
     
-    # geo.SCG <- exprs2fingerprint_options(exprs = exprs, 
-    #                                      platform = platform,
-    #                                      species = species, 
-    #                                      GEOthreshold = GEOthreshold, 
-    #                                      geneset = geneset,
-    #                                      transformation = transformation,
-    #                                      statistic = statistic, 
-    #                                      normalizedScore = normalizedScore, 
-    #                                      progressBar = progressBar
-    # )
-	
+    # Use SCE to calculate a score for each pathway based on the mean or median
+    if (rankOutput == FALSE){
+        SCE <- single.chip.enrichment( 
+            exprs = exprs,
+            geneset = geneset,
+            transformation = transformation,
+            statistic = statistic,
+            progressBar = progressBar
+        )
+    }
+    if (rankOutput == TRUE){
+        # just produce list of ranked genes
+        SCE<-apply(exprs, 2, rank, ties.method = "average")
+        GEOthreshold == FALSE
+    }
+    
+    #########							
+    # Threshold according to GEO corpus background 	
+    #########   			
+    
+    if (GEOthreshold == TRUE){
+        SCE<-thresholdFingerprint(SCE = SCE, platform = platform)
+    }
 
-	return(list(SCG = geo.SCG, species = "human", platform = platform))
+	return(list(SCG = SCE, species = "human", platform = platform))
 	}
 
