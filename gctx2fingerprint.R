@@ -18,32 +18,72 @@ load("/shared/hidelab2/shared/Sokratis/pathprint/fingerprint/package/pathprint/d
 # matrix. EnrichmentMethod - algorithm used to calculate gene enrichment score and
 # it can only be  single.chip.enrichment (SCE). Transformation, statistic, 
 # normalizedScore and progressBar are relevant to SCE.
-gctx2fingerprint<-function(	GSM, GEOpath = tempdir(), GEOthreshold = TRUE,
+
+# EXP              : experiment name {string}
+# EXPath           : path to the experiment files {string}
+# GEOthreshold     : 
+# geneset          : geneset/pathway name {string}
+# enrichmentMethod : the enrichment method to be used {string}
+# transformation   : the transformation to be used {string}
+# statistic        : the statistic to be used {string}
+# normalizedScore  : normalize of not {boolean}
+# progressBar      : show progress bar for not {boolean}
+
+
+# NOTE: before we run the whole pipeline hardcode the platform name here!!!
+
+gctx2fingerprint<-function(	EXP, EXPath = tempdir(), GEOthreshold = TRUE,
 							geneset = "KEGG and Wikipathways and static",
 							enrichmentMethod = "SCE", transformation = "squared.rank",
 							statistic = "mean", normalizedScore = FALSE,
 							progressBar = FALSE
 							)
 	{
+    # Hardcoded platform that corresponds to the GSE we use: GSE70138
+    platform <- "GPL20573"
+    
+    # Check if the experiment matrix is in the gctx_experiments folder. If not 
+    # stop fingerprinting execution and inform the user, otherwise load it.
+    file_path <- paste(EXPath, EXP, ".RData", sep="")
+    if(!file.exists(file_path, showWarnings = TRUE)[1]) {
+        stop(paste("Cannot find experiment file: "), EXP, sep = "")
+    }else {
+        load_name <- paste(EXPath, EXP)
+        load(file_path)
+    }
+    exp_matrix<-as.data.frame(exp_matrix)
+    colnames(exp_matrix)[1] <- "EntrezID"
+    
+    # Convert to numeric as occasionally factors can complicate matters
+    exp_matrix[,-1] <- apply(exp_matrix[,-1, drop = FALSE], 2, function(x){as.numeric(as.character(x))})
+    
+    # Take care of the duplicate gene entrez IDs (which occured after updating them)
+    exp_matrix_unique <- aggregate(exp_matrix[,-1], list(EntrezID = exp_matrix$EntrezID), mean)
+    
+    # Create the exprs object here to feed to scripts further down. First make 
+    # it a data.frame, name it "data" and assign column(ID_REF) and row(gene
+    # entrez IDs) names.
+    exprs<-as.data.frame(exp_matrix_unique[,2])
+    colnames(exprs)[1] <- "ID_REF"
+    exprs$ID_REF <- tolower(exprs$ID_REF)
+    rownames(exprs) <- exp_matrix_unique[,1]
+    
 
-	# load list of GEO files - for speed only do this if object not found already
-	if (!(exists("GEOfiles"))){	
-	assign("GEOfiles", gsub(".soft", "", dir(path = GEOpath)), .GlobalEnv)
-		}
-	
-	# retrieve GEO file and strip out required meta data
-	library(GEOquery)
-	print("Downloading/loading GEO file")
-	# Only downloaded file if not already in file path
-	if (GSM %in% GEOfiles){
-		print("using locally saved GEO file")
-		try(geo <- getGEO(GSM, file = (paste(GEOpath, GSM, ".soft", sep = ""))))
-		}
-	else if (!(GSM %in% GEOfiles)){
-		try(geo<-getGEO(GSM, destdir = GEOpath))
-		}
+    
+    # exprs<-GSMtable2exprs(Table(geo))
+    
+    # geo.SCG <- exprs2fingerprint_options(exprs = exprs, 
+    #                                      platform = platform,
+    #                                      species = species, 
+    #                                      GEOthreshold = GEOthreshold, 
+    #                                      geneset = geneset,
+    #                                      transformation = transformation,
+    #                                      statistic = statistic, 
+    #                                      normalizedScore = normalizedScore, 
+    #                                      progressBar = progressBar
+    # )
 	
 
-	return(list(SCG = geo.SCG, species = species, platform = platform))
+	return(list(SCG = geo.SCG, species = "human", platform = platform))
 	}
 
