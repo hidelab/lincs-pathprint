@@ -10,3 +10,5 @@ New pipeline for pathprinting LINCS data
 
 
 3. **gctx2fingerprint.R** : Script that ... and produce the experiment-fingerprints.
+
+4. **custom.single.chip.enrichment.R** : Slightly tweaked version of *single.chip.enrichment.R* that omits some unrelated parameters.
