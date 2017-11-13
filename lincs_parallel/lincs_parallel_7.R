@@ -17,8 +17,9 @@ total <- length(current_samples)
 
 # load contents of directory once
 # this used to be within the loop
-e_path = "~/LINCS project/LINCS specific scripts/sq_gctx_experiments"
-dir<-dir(path = e_path)
+e_path = "/shared/hidelab2/shared/Sokratis/pathprint_lincs/sq_gctx_experiments/"
+gctx_e_path <- "/shared/hidelab2/shared/Sokratis/pathprint_lincs/gctx_experiments/"
+dir <- dir(path = e_path)
 
 for (i in 1:length(current_samples)){
 	print(paste(i, "of", total, sep = " "))
@@ -29,23 +30,24 @@ for (i in 1:length(current_samples)){
 	if (filename %in% dir){
 		print ("File already analyzed")
 	}
-	else if (!(filename %in% dir(path = path))){
+	else if (!(filename %in% dir(path = e_path))){
 	    #try-catching to skip erroneous experiments to avoid crushing
 	    temp<-tryCatch(gctx2fingerprint(
-    	    GSM = current_samples[i], 
+    	    EXP = current_samples[i], 
     	    GEOthreshold = FALSE,
-    	    GEOpath = GEOpath,
+    	    EXPath = gctx_e_path,
     	    geneset = "KEGG and Wikipathways and static",
     	    enrichmentMethod = "SCE",
     	    transformation = "squared.rank",
     	    statistic = "mean",
-    	    normalizedScore = FALSE,
     	    progressBar = FALSE
     	# Do nothing if an error occurs [add handlers later]*
-        ),error=function(e)NULL)
+        ),error=function(e){
+		print(e)  
+          })
 	    
 	    temp1<-list("name" = temp)
 	    names(temp1)<-current_samples[i]
 	    save(temp1, file = paste(e_path, filename, sep =""))
-		  }
-		}
+	}
+}

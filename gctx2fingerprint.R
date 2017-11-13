@@ -11,8 +11,13 @@
 # script (as lots of code that handles probes etc is useless in this project)
 # Remember to code and test on HPC. Upload evrything on my pathprint-lincs folder
 
-# Load the genesets
-load("/shared/hidelab2/shared/Sokratis/pathprint/fingerprint/package/pathprint/data/genesets.rda")
+# Load geneset related files
+load("/shared/hidelab2/shared/Sokratis/pathprint_lincs/genesets.rda")
+load("/shared/hidelab2/shared/Sokratis/pathprint_lincs/pathprint.Hs.gs.rda")
+
+
+# Load the custom SCE script
+source("/shared/hidelab2/shared/Sokratis/pathprint_lincs/custom.single.chip.enrichment.R")
 
 # This is a function to produce a normalized fingerprint directly from an expression 
 # matrix. EnrichmentMethod - algorithm used to calculate gene enrichment score and
@@ -44,11 +49,12 @@ gctx2fingerprint<-function(	EXP, EXPath = tempdir(), GEOthreshold = TRUE,
     # Check if the experiment matrix is in the gctx_experiments folder. If not 
     # stop fingerprinting execution and inform the user, otherwise load it.
     file_path <- paste(EXPath, EXP, ".RData", sep="")
-    if(!file.exists(file_path, showWarnings = TRUE)[1]) {
+    file_path_corrected <- gsub(":", "_", file_path)
+    if(!file.exists(file_path_corrected, showWarnings = TRUE)[1]) {
         stop(paste("Cannot find experiment file: "), EXP, sep = "")
     }else {
-        load_name <- paste(EXPath, EXP)
-        load(file_path)
+	load_name <- gsub(":", "_", file_path)     
+	load(load_name)
     }
     exp_matrix<-as.data.frame(exp_matrix)
     colnames(exp_matrix)[1] <- "EntrezID"
@@ -70,33 +76,25 @@ gctx2fingerprint<-function(	EXP, EXPath = tempdir(), GEOthreshold = TRUE,
     #########							
     # Run pathway enrichment	
     #########
+
+    gsdb <- get(genesets["human"])
     
     print("Running fingerprint")
     
-    # Use SCE to calculate a score for each pathway based on the mean or median
-    if (rankOutput == FALSE){
-        SCE <- single.chip.enrichment( 
-            exprs = exprs,
-            geneset = geneset,
-            transformation = transformation,
-            statistic = statistic,
-            progressBar = progressBar
-        )
-    }
-    if (rankOutput == TRUE){
-        # just produce list of ranked genes
-        SCE<-apply(exprs, 2, rank, ties.method = "average")
-        GEOthreshold == FALSE
-    }
+    # Use SCE to calculate a score for each pathway based on the mean or median   
+   
+    SCE <- custom.single.chip.enrichment( 
+        exprs = exprs,
+        geneset = gsdb,
+        transformation = transformation,
+        statistic = statistic,
+        progressBar = progressBar
+    )
     
     #########							
     # Threshold according to GEO corpus background 	
     #########   			
-    
-    if (GEOthreshold == TRUE){
-        SCE<-thresholdFingerprint(SCE = SCE, platform = platform)
-    }
 
 	return(list(SCG = SCE, species = "human", platform = platform))
-	}
+}
 
