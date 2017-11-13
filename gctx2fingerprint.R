@@ -4,12 +4,9 @@
 # Status: v1
 # Timestamp: 08.11.2017
 # Script that accepts a experiment name, loads it's matrix and produces the
-# 
-
-# Script start - start editing here 10-11-2017: I need to merge 
-# geo2fingerprint-exprs2fingerprint-single.chip.enrichment.R in this one 
-# script (as lots of code that handles probes etc is useless in this project)
-# Remember to code and test on HPC. Upload evrything on my pathprint-lincs folder
+# experiment fingerprints. It's a merge of 
+# geo2fingerprint-exprs2fingerprint.R. It uses custom.single.chip.enrichment.R 
+# to produce the experiment fingerprints.
 
 # Load geneset related files
 load("/shared/hidelab2/shared/Sokratis/pathprint_lincs/genesets.rda")

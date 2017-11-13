@@ -9,6 +9,6 @@ New pipeline for pathprinting LINCS data
 3. **lincs_parallel_x.R** : Parallel scripts(14). Each initiates the experiment-fingerprinting process of multiple experiments by running the *gctx2fingerprint.R* script.
 
 
-3. **gctx2fingerprint.R** : Script that ... and produce the experiment-fingerprints.
+3. **gctx2fingerprint.R** : Script that accepts a experiment name, loads it's matrix and produces the experiment fingerprints. It's a merge of geo2fingerprint.R and exprs2fingerprint.R. It utilizes *custom.single.chip.enrichment.R* to produce the experiment fingerprints.
 
 4. **custom.single.chip.enrichment.R** : Slightly tweaked version of *single.chip.enrichment.R* that omits some unrelated parameters.
