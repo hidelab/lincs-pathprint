@@ -1,0 +1,16 @@
+#!/bin/bash
+#$ -P hidelab
+#$ -q hidelab.q
+#$ -l rmem=16G -l mem=16G
+#$ -pe openmp 12
+#$ -j y
+#$ -l h_rt=72:00:00
+#$ -m bea
+#$ -M s.kariotis@sheffield.ac.uk
+
+module load apps/R/3.3.1
+
+Rscript constructing\ POE\ thresholds.R 
+#Rscript Fingerprint_post_processing_step3.R
+
+echo Processing job done!
