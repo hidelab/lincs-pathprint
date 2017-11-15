@@ -31,6 +31,9 @@ LINCS.metadata.matrix <- as.data.frame(append(LINCS.metadata.matrix, list(Specie
 LINCS.metadata.matrix <- as.data.frame(append(LINCS.metadata.matrix, list(GPL = "GPL20573"), after = 1))
 LINCS.metadata.matrix <- as.data.frame(append(LINCS.metadata.matrix, list(GSE = "GSE70138"), after = 1))
 
+# Filtering out incomplete lines
+LINCS.metadata.matrix <- LINCS.metadata.matrix[!(is.na(LINCS.metadata.matrix$inst_id == "") | LINCS.metadata.matrix$cell_id == "" | LINCS.metadata.matrix$det_plate == ""), ]
+
 # Convert to ascii strings for better package compatibility
 
 LINCS.metadata.matrix.temp<-LINCS.metadata.matrix
