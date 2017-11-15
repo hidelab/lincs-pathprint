@@ -27,15 +27,10 @@ print("select platform file")
 platformfile<-defineFile()
 load(paste(dataPath, platformfile, sep = ""))
 
-# download and extract metadata database
-library(GEOmetadb)
-setwd("/shared/hidelab2/shared/Sokratis/pathprint/Databases/GEOmetadb")
-getSQLiteFile()
-con <- dbConnect(SQLite(), "GEOmetadb.sqlite")
+# Read metadata table
+metadata_table = read.table("~/LINCS project/LINCS specific scripts/gctx_Folder/GSE70138_Broad_LINCS_inst_info.txt", fill = TRUE)
 
-# retrieve metadata
 gsm.char = dbGetQuery(con, "select gsm, characteristics_ch1 from gsm")
-gsm.title = dbGetQuery(con, "select gsm, title from gsm")
 gsm.source = dbGetQuery(con, "select gsm, source_name_ch1 from gsm")
 gsm.species = dbGetQuery(con, "select gsm, organism_ch1 from gsm")
 gsm.gse<-geoConvert(rownames(platform.frame), c("gse"))$gse
@@ -44,12 +39,11 @@ dbDisconnect(con)
 
 # construct metadata table
 GEO.metadata.matrix<-as.data.frame(matrix(nrow = length(rownames(platform.frame)), ncol = 7))
-colnames(GEO.metadata.matrix)<-c("GSM", "GSE", "GPL", "Species", "Title", "Source", "Characteristics")
-GEO.metadata.matrix$GSM<-as.character(rownames(platform.frame))
+colnames(GEO.metadata.matrix)<-c( "Title", "GSE", "GPL", "Species", "Source", "Characteristics")
+GEO.metadata.matrix$Title<-as.character(rownames(platform.frame))
 GEO.metadata.matrix$GSE<-gsm.gse$to_acc[match(GEO.metadata.matrix$GSM, gsm.gse$from_acc)]
 GEO.metadata.matrix$GPL<-gsm.gpl$to_acc[match(GEO.metadata.matrix$GSM, gsm.gpl$from_acc)]
 GEO.metadata.matrix$Species<-gsm.species$organism_ch1[match(GEO.metadata.matrix$GSM, gsm.species$gsm)]
-GEO.metadata.matrix$Title<-gsm.title$title[match(GEO.metadata.matrix$GSM, gsm.title$gsm)]
 GEO.metadata.matrix$Source<-gsm.source$source_name_ch1[match(GEO.metadata.matrix$GSM, gsm.source$gsm)]
 GEO.metadata.matrix$Characteristics<-gsm.char$characteristics_ch1[match(GEO.metadata.matrix$GSM, gsm.char$gsm)]
 
