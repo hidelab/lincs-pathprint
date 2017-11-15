@@ -1,10 +1,11 @@
 # Post processing fingerprint step 1
 # Author: Sokratis Kariotis
-# Timestamp: 
-#
-########
-# PART 1
-########
+# Description: Creates the *sq_.frame.xxxx-xx-xx.RData* file (SCE dataframe) and 
+# the *platform.frame.xxxx-xx-xx.RData* file (platform dataframe). It also creates 
+# the *sq_.pathway.SCE.x.RData* files for each pathway.
+##########
+# PART 1 #
+##########
 
 # set directory holding fingerprint collection
 fingerpath<-"~/LINCS project/LINCS specific scripts/sq_gctx_experiments/"

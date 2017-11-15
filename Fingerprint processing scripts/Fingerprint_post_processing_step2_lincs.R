@@ -1,10 +1,9 @@
 # Post processing fingerprint step 2
 # Author: Sokratis Kariotis
-# Timestamp: 
-#
-########
-# PART 2
-########
+# Description: Creates the POE (probability of expression) file for each pathway. 
+##########
+# PART 2 #
+##########
 
 # define paths and headers
 header<-"sq_"
