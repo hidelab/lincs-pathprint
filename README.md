@@ -2,6 +2,9 @@
 New pipeline for pathprinting LINCS data
 
 ## Scripts
+
+### Pre-processing
+
 1. **lincs_pathprint_download.R** : Script to download the Level 3 GSE from LINCS (GSE70138_Broad_LINCS_Level3_INF_mlr12k_n345976x12328_2017-03-06.gctx) and split them in a number of chunks (adjustable by number_of_chunks variable). Before saving to an equal number of matrices, the gene IDs are updated using the entrezUpdate.R script from the package GMAfunctions. 
 
 2. **lincs_pathprint_runner.R** : Script that initiates a number of cores, each one utilizing a number of experiment expression files to run a *lincs_parallel_x.R* script.
@@ -12,3 +15,11 @@ New pipeline for pathprinting LINCS data
 3. **gctx2fingerprint.R** : Script that accepts a experiment name, loads it's matrix and produces the experiment fingerprints. It's a merge of geo2fingerprint.R and exprs2fingerprint.R. It utilizes *custom.single.chip.enrichment.R* to produce the experiment fingerprints.
 
 4. **custom.single.chip.enrichment.R** : Slightly tweaked version of *single.chip.enrichment.R* that omits some unrelated parameters.
+
+### Post-processing
+
+1. **Fingerprint_post_processing_step1_lincs.R** :  Creates the *sq_.frame.xxxx-xx-xx.RData* file (SCE dataframe) and the *platform.frame.xxxx-xx-xx.RData* file (platform dataframe). It also crate the *sq_.pathway.SCE.x.RData* files for each pathway.
+
+2. **Fingerprint_post_processing_step2_lincs.R** :  Creates the POE (probability of expression) file for each pathway. 
+
+3. **Fingerprint_post_processing_step3_lincs.R** :  Creates the *sq_.matrix.xxxx-xx-xx.RData* POE matrix file (one file for all pathways). 
