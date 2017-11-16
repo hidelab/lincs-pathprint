@@ -1,6 +1,9 @@
-# Compile metadata for POE matrix
+# Post processing metadata matrix creation step 4
 # Author: Sokratis Kariotis
-# Description: Script to compile a table of metadata for the fingerprint matrix
+# Description: Script to compile a table of metadata for the fingerprint matrix.
+# Due to the nature of the metadata found in GSE70138_Broad_LINCS_inst_info.txt, 
+# the LINCS.metadata.matrix will differ from the correspodning GEO file. In addition
+# to the present columns, we have GPL and GSE columns. Subject to change!
 
 # Define path of repository
 definePath<-function(){
@@ -47,12 +50,12 @@ LINCS.metadata.matrix.temp[,5] <- iconv(LINCS.metadata.matrix.temp[,5], "latin1"
 LINCS.metadata.matrix.temp[,6] <- iconv(LINCS.metadata.matrix.temp[,6], "latin1", "ASCII", "byte")
 LINCS.metadata.matrix.temp[,7] <- iconv(LINCS.metadata.matrix.temp[,7], "latin1", "ASCII", "byte")
 
-# show changes
+# Show changes
 all.equal(LINCS.metadata.matrix.temp, LINCS.metadata.matrix)
 
 LINCS.metadata.matrix<-LINCS.metadata.matrix.temp
 
-# save file into fingerprint package
+# Save file into fingerprint package
 try(system(paste("cp ",
              pathprintRepository,
              "LINCS.metadata.matrix.RData ",

@@ -1,11 +1,6 @@
-# Constructs the POE  thresholds for the fingerprint
-#
-# Author: Gabriel Altschuler
-# Modified by: Sokratis Kariotis
-# Status: Updated to allow source
-# Timestamp: 
-# Location: iceberg
-# Script to obtain threshold values for the fingerprint
+# Post processing construction of the POE  thresholds for the fingerprint step 5
+# Author: Sokratis Kariotis
+# Description: Script to obtain threshold values for the fingerprint
 # These values will be passed to a dataframe, thresholds.RData
 # This will be included into the fingerprinting R package
 # The background parameters are determined by the PEO method
