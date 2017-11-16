@@ -1,50 +1,40 @@
 # Post processing construction of the POE  thresholds for the fingerprint step 5
 # Author: Sokratis Kariotis
-# Description: Script to obtain threshold values for the fingerprint
-# These values will be passed to a dataframe, thresholds.RData
-# This will be included into the fingerprinting R package
-# The background parameters are determined by the PEO method
+# Description: Script to obtain threshold values for the fingerprint. These values will 
+# be passed to a dataframe, thresholds.RData. This will be included into the 
+# fingerprinting R package. The background parameters are determined by the PEO method.
 # The threshold was optimized against a panel of tissue samples
 
-# define path of repository
-# pathprintRepository<-"/shared/hidelab2/shared/Sokratis/pathprint/fingerprint/data/"
-#definePath<-function(){
-#readline("define pathprint repository, or blank for default (/shared/hidelab2/shared/Sokratis/pathprint/fingerprint/data/) : ")
-#}
-#pathprintRepository<-definePath()
-pathprintRepository<-"/shared/hidelab2/shared/Sokratis/pathprint/fingerprint/data/"
+# Define path of repository
+definePath<-function(){
+    readline("define pathprint repository, or blank for default (~/LINCS project/LINCS specific scripts/post_processing_general_files/) : ")
+}
+pathprintRepository<-definePath()
 
 if (pathprintRepository == ""){
-	pathprintRepository<-"/shared/hidelab2/shared/Sokratis/pathprint/fingerprint/data/"
-	}
+    pathprintRepository<-"~/LINCS project/LINCS specific scripts/post_processing_general_files/"
+}
 
 # load raw SCE and POE matrix, need to select appropriate dates
-dataPath<-"/shared/hidelab2/shared/Sokratis/pathprint/Fingerprinting/data/"
+dataPath<-"~/LINCS project/LINCS specific scripts/post_processing_general_files/"
 
-#defineFile<-function(){
-#readline("enter filename: ")
-#}
+# To make it more versatile
+# print("Relevant available files:")
+# dir(path = dataPath, pattern = "POE.matrix.20")
+# print("select POE file")
 
-dir(path = dataPath,
-    pattern = "POE.matrix.20")
-print("select POE file")
+POEfile<-"sq_.POE.matrix.2017-11-13.RData"
 
-#POEfile<-defineFile()
-POEfile<-"sq_.POE.matrix.2017-06-20.RData"
+# dir(path = dataPath, pattern = ".20")
+# print("select SCE file")
 
-dir(path = dataPath,
-pattern = ".20")
-print("select SCE file")
+SCEfile<-"sq_.frame.2017-11-13.RData"
 
-#SCEfile<-defineFile()
-SCEfile<-"sq_.frame.2017-06-20.RData"
+# dir(path = dataPath,
+# pattern = "platform.frame.20")
+# print("select platform file")
 
-dir(path = dataPath,
-pattern = "platform.frame.20")
-print("select platform file")
-
-#platformfile<-defineFile()
-platformfile<-"platform.frame.2017-06-20.RData"
+platformfile<-"platform.frame.2017-11-13.RData"
 
 load(paste(dataPath, POEfile, sep = ""))
 load(paste(dataPath, SCEfile, sep = ""))
