@@ -24,4 +24,6 @@ New pipeline for pathprinting LINCS data
 
 3. **Fingerprint_post_processing_step3_lincs.R** :  Creates the *sq_.matrix.xxxx-xx-xx.RData* POE matrix file (one file for all pathways). 
 
-4. **matrix_metadata_lincs.R** : Creates the *LINCS.metadata.matrix.RData* file
+4. **matrix_metadata_lincs.R** : Creates the *LINCS.metadata.matrix.RData* file.
+ 
+5. **constructing POE thresholds.R** : Obtains POE threshold values and creates *LINCS.fingerprint.matrix.RData* file.

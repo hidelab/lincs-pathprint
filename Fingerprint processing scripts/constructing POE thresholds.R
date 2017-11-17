@@ -2,7 +2,7 @@
 # Author: Sokratis Kariotis
 # Description: Script to obtain threshold values for the fingerprint. These values will 
 # be passed to a dataframe, thresholds.RData. This will be included into the 
-# fingerprinting R package. The background parameters are determined by the PEO method.
+# fingerprinting R package. The background parameters are determined by the POE method.
 # The threshold was optimized against a panel of tissue samples
 
 # Define path of repository
@@ -63,7 +63,7 @@ dim(platform.frame)
 sum(colnames(SCE.frame) == colnames(POE.matrix))
 sum(platform.frame$GEO == colnames(POE.matrix))
 
-# now need to define thresholds for each platform
+# Now need to define thresholds for each platform
 # N.B. this produces warnings and NaN values where pathway scores are NA
 # That's okay for now
 platforms<-unique(as.character(platform.frame$Platform))
