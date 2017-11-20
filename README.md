@@ -27,3 +27,8 @@ New pipeline for pathprinting LINCS data
 4. **matrix_metadata_lincs.R** : Creates the *LINCS.metadata.matrix.RData* file.
  
 5. **constructing POE thresholds.R** : Obtains POE threshold values and creates *LINCS.fingerprint.matrix.RData* file.
+
+
+## Notes
+
+1. Optimize speed in pre-processing step
