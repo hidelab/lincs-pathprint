@@ -8,14 +8,14 @@
 ##########
 
 # set directory holding fingerprint collection
-fingerpath<-"~/LINCS project/LINCS specific scripts/sq_gctx_experiments/"
+fingerpath<-"/shared/hidelab2/shared/Sokratis/pathprint_lincs/sq_gctx_experiments/"
 
 # define file identifier
 header<-"sq_"
 setwd(fingerpath)
 
-load("~/LINCS project/LINCS specific scripts/genesets.rda")
-load("~/LINCS project/LINCS specific scripts/pathprint.Hs.gs.rda")
+load("/shared/hidelab2/shared/Sokratis/pathprint_lincs/genesets.rda")
+load("/shared/hidelab2/shared/Sokratis/pathprint_lincs/pathprint.Hs.gs.rda")
 
 print("Loading files")
 
@@ -32,7 +32,7 @@ platforms<-levels(as.factor(probe.data$GPL))
 platforms.nrow<-lapply(platforms, function(x){table(probe.data$nrow[probe.data$GPL == x])})
 names(platforms.nrow)<-platforms
 
-save(probe.data, file = "~/LINCS project/LINCS specific scripts/probe.Rdata")
+save(probe.data, file = "/shared/hidelab2/shared/Sokratis/pathprint_lincs/probe.Rdata")
 print("Saved probe.RData")
 
 setwd(fingerpath)
@@ -61,7 +61,7 @@ names(SCE)<-gsub(header, "", files)
 SCE.frame<-t(as.data.frame(SCE))
 colnames(SCE.frame)<-names(get(genesets[[1]]))
 rownames(SCE.frame)<-gsub(header, "", files)
-save(SCE.frame, file = paste("~/LINCS project/LINCS specific scripts/post_processing_general_files/", header, ".frame.",
+save(SCE.frame, file = paste("/shared/hidelab2/shared/Sokratis/pathprint_lincs/post_processing_general_files/", header, ".frame.",
     Sys.Date(), ".RData",
     sep = ""
     )
@@ -71,7 +71,7 @@ save(SCE.frame, file = paste("~/LINCS project/LINCS specific scripts/post_proces
 print(paste("saving platform dataframe with timestamp ", Sys.Date(), sep = " "))
 names(platform)<-gsub(header, "", files)
 platform.frame<-data.frame(GEO = names(platform), Platform = unlist(platform))
-save(platform.frame, file = paste("~/LINCS project/LINCS specific scripts/post_processing_general_files/platform.frame",
+save(platform.frame, file = paste("/shared/hidelab2/shared/Sokratis/pathprint_lincs/post_processing_general_files/platform.frame",
                                   Sys.Date(), "RData",
                                   sep = "."
                                   )
@@ -88,7 +88,7 @@ library(metaArray)
 
 for (i in 1:ncol(SCE.frame)){
 assign("pathway.SCE", SCE.frame[,i])
-save(pathway.SCE, file = paste("~/LINCS project/LINCS specific scripts/post_processing_general_files/pathwayFrames/", header, 
+save(pathway.SCE, file = paste("/shared/hidelab2/shared/Sokratis/pathprint_lincs/post_processing_general_files/pathwayFrames/", header, 
                   ".pathway.SCE.", i, ".RData", sep = ""))
 }
 

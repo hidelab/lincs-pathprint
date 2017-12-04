@@ -27,7 +27,7 @@ platformfile<-defineFile()
 load(paste(dataPath, platformfile, sep = ""))
 
 # Read metadata table
-LINCS.metadata.matrix = read.table("~/LINCS project/LINCS specific scripts/gctx_Folder/GSE70138_Broad_LINCS_inst_info.txt", fill = TRUE, header = TRUE)
+LINCS.metadata.matrix = read.table("/shared/hidelab2/shared/Sokratis/pathprint_lincs/gctx_Folder/GSE70138_Broad_LINCS_inst_info.txt", fill = TRUE, header = TRUE)
 
 # Construct metadata table
 LINCS.metadata.matrix <- as.data.frame(append(LINCS.metadata.matrix, list(Species = "Homo sapiens"), after = 1))

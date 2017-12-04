@@ -7,10 +7,10 @@
 
 # Define paths and headers
 header<-"sq_"
-setwd("~/LINCS project/LINCS specific scripts/post_processing_general_files/")
+setwd("/shared/hidelab2/shared/Sokratis/pathprint_lincs/post_processing_general_files/")
 
-Pathwaypath <- "~/LINCS project/LINCS specific scripts/post_processing_general_files/pathwayFrames/"
-POEpath <- "~/LINCS project/LINCS specific scripts/post_processing_general_files/pathwayFrames/POE/"
+Pathwaypath <- "/shared/hidelab2/shared/Sokratis/pathprint_lincs/post_processing_general_files/pathwayFrames/"
+POEpath <- "/shared/hidelab2/shared/Sokratis/pathprint_lincs/post_processing_general_files/pathwayFrames/POE/"
 
 # Define the location of the pathway frame
 dir()[grep("platform", dir())]
@@ -20,8 +20,8 @@ load(filename)
 
 # Load list of pathways
 library(pathprint)
-load("~/LINCS project/LINCS specific scripts/genesets.rda")
-load("~/LINCS project/LINCS specific scripts/pathprint.Hs.gs.rda")
+load("/shared/hidelab2/shared/Sokratis/pathprint_lincs/genesets.rda")
+load("/shared/hidelab2/shared/Sokratis/pathprint_lincs/pathprint.Hs.gs.rda")
 
 pathwayNames<-names(get(genesets[[1]]))
 
@@ -58,7 +58,7 @@ POE.matrix.0.001<-(POE.matrix > 0.001) - (POE.matrix < -0.001)
 # How many zeros?
 (sum((POE.matrix.0.001 == 0), na.rm = TRUE))/(dim(POE.matrix.0.001)[1]*dim(POE.matrix.0.001)[2])
 
-save(POE.matrix.0.001, file = paste("~/LINCS project/LINCS specific scripts/post_processing_general_files/", header, ".POE.matrix.0.001.",
+save(POE.matrix.0.001, file = paste("/shared/hidelab2/shared/Sokratis/pathprint_lincs/post_processing_general_files/", header, ".POE.matrix.0.001.",
                               Sys.Date(), ".RData",
                               sep = ""
                               )

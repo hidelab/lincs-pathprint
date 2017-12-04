@@ -7,16 +7,16 @@
 
 # Define path of repository
 definePath<-function(){
-    readline("define pathprint repository, or blank for default (~/LINCS project/LINCS specific scripts/post_processing_general_files/) : ")
+    readline("define pathprint repository, or blank for default (/shared/hidelab2/shared/Sokratis/pathprint_lincs/post_processing_general_files/) : ")
 }
 pathprintRepository<-definePath()
 
 if (pathprintRepository == ""){
-    pathprintRepository<-"~/LINCS project/LINCS specific scripts/post_processing_general_files/"
+    pathprintRepository<-"/shared/hidelab2/shared/Sokratis/pathprint_lincs/post_processing_general_files/"
 }
 
 # load raw SCE and POE matrix, need to select appropriate dates
-dataPath<-"~/LINCS project/LINCS specific scripts/post_processing_general_files/"
+dataPath<-"/shared/hidelab2/shared/Sokratis/pathprint_lincs/post_processing_general_files/"
 
 # To make it more versatile
 # print("Relevant available files:")

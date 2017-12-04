@@ -7,7 +7,7 @@
 
 # define paths and headers
 header<-"sq_"
-setwd("~/LINCS project/LINCS specific scripts/post_processing_general_files/")
+setwd("/shared/hidelab2/shared/Sokratis/pathprint_lincs/post_processing_general_files/")
 
 # Define the location of the pathway frame
 dir()[grep("platform", dir())]
@@ -16,8 +16,8 @@ print(paste("Loading platform data: ", filename, sep = ""))
 load(filename)
 
 # create directory to store POE files
-Pathwaypath <- "~/LINCS project/LINCS specific scripts/post_processing_general_files/pathwayFrames/"
-POEpath <- "~/LINCS project/LINCS specific scripts/post_processing_general_files/pathwayFrames/POE/"
+Pathwaypath <- "/shared/hidelab2/shared/Sokratis/pathprint_lincs/post_processing_general_files/pathwayFrames/"
+POEpath <- "/shared/hidelab2/shared/Sokratis/pathprint_lincs/post_processing_general_files/pathwayFrames/POE/"
 try(system(paste("mkdir ", POEpath, header, sep = "")))
 
 # this script is run across 14 nodes
@@ -33,8 +33,8 @@ platforms<-as.character(unique(platform.frame$Platform))
 
 # load list of pathways
 library(pathprint)
-load("~/LINCS project/LINCS specific scripts/genesets.rda")
-load("~/LINCS project/LINCS specific scripts/pathprint.Hs.gs.rda")
+load("/shared/hidelab2/shared/Sokratis/pathprint_lincs/genesets.rda")
+load("/shared/hidelab2/shared/Sokratis/pathprint_lincs/pathprint.Hs.gs.rda")
 
 pathwayNames<-names(get(genesets[[1]]))
 
