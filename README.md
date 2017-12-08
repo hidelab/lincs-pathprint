@@ -1,4 +1,4 @@
-# lincs-pathprint
+# LINCS-pathprint
 New pipeline for pathprinting LINCS data
 
 #### Status
