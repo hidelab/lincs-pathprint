@@ -1,6 +1,10 @@
 # lincs-pathprint
 New pipeline for pathprinting LINCS data
 
+#### Status
+1. Download: Completed, but we have less experiments than expected, see 
+2. 
+
 ## Scripts
 
 ### Pre-processing
@@ -31,4 +35,4 @@ New pipeline for pathprinting LINCS data
 
 ## Notes
 
-1. Optimize speed in pre-processing step
+1. Optimize speed in pre-processing 
