@@ -5,7 +5,7 @@ New pipeline for pathprinting LINCS data
 Operation | Status | Note
 --- | --- | ---
 Experiment download | `Imperfect` | Less experiments than expected, see [Issue 2](https://github.com/hidelab/lincs-pathprint/issues/2)
-Experiment Fingerprinting | `Complete` | -
+Experiment Fingerprinting | ```js Complete ``` | -
 Post-processing step 1 | `Complete` | -
 Post-processing step 2 | `Running on Iceberg` | -
 
