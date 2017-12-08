@@ -7,6 +7,11 @@ New pipeline for pathprinting LINCS data
 3. Post-processing step 1: Complete
 3. Post-processing step 2: Running on HPC
 
+Operation | Status | Note
+--- | --- | ---
+Experiments download | `Complete` | Less experiments than expected, see [Issue 2](https://github.com/hidelab/lincs-pathprint/issues/2)
+
+
 ## Scripts
 
 ### Pre-processing
