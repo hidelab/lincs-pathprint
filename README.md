@@ -2,8 +2,10 @@
 New pipeline for pathprinting LINCS data
 
 #### Status
-1. Download: Completed, but we have less experiments than expected, see [Issue 2](https://github.com/hidelab/lincs-pathprint/issues/2)
-2. 
+1. Download: Complete, but we have less experiments than expected, see [Issue 2](https://github.com/hidelab/lincs-pathprint/issues/2)
+2. Fingerprinting: Complete
+3. Post-processing step 1: Complete
+3. Post-processing step 2: Running on HPC
 
 ## Scripts
 
