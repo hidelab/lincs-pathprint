@@ -7,7 +7,10 @@ Operation | Status | Note
 Experiment download | `Imperfect` | Less experiments than expected, see [Issue 2](https://github.com/hidelab/lincs-pathprint/issues/2)
 Experiment Fingerprinting | `Complete` | -
 Post-processing step 1 | `Complete` | -
-Post-processing step 2 | `Running on Iceberg` | -
+Post-processing step 2 | `Complete` | -
+Post-processing step 3 | `Complete` | -
+Metadata matrix creation | `Complete` | -
+Fingerprint matrix creation | `Complete` | -
 
 ## Scripts
 
@@ -40,3 +43,4 @@ Post-processing step 2 | `Running on Iceberg` | -
 ## Notes
 
 1. Optimize speed in pre-processing 
+2. In constructing script change the names of the files saved in the end
