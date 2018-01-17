@@ -1,7 +1,7 @@
 # LINCS-pathprint
 New pipeline for pathprinting LINCS data
 
-#### Status
+## Status
 Operation | Status | Note
 --- | --- | ---
 Experiment download | `Imperfect` | Less experiments than expected, see [Issue 2](https://github.com/hidelab/lincs-pathprint/issues/2)
