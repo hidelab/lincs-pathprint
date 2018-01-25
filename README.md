@@ -44,3 +44,4 @@ Fingerprint matrix creation | `Complete` | Change old GEO naming to LINCS
 
 1. Optimize speed in pre-processing 
 2. In constructing script change the names of the files saved in the end
+3. Before running the pipeline few points have to be hardcoded: in **gctx2fingerprint.R**: the platform name
